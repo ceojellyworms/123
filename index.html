@@ -1,9 +1,300 @@
-<html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wrholder</title>
 
-<script>
-!function(){if(!(window.Gleap=window.Gleap||[]).invoked){window.GleapActions=[];var e=new Proxy({invoked:!0},{get:function(e,n){return"invoked"===n?e.invoked:function(){var e=Array.prototype.slice.call(arguments);window.GleapActions.push({e:n,a:e})}},set:function(e,n,t){return e[n]=t,!0}});window.Gleap=e;var n=document.getElementsByTagName("head")[0],t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://sdk.gleap.io/latest/index.js",n.appendChild(t),
-    window.Gleap.initialize("xTQX8msV5mvs8CqjSbV6PwtnHKik5VaZ")
-}}();
-</script>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,Segoe UI,sans-serif;
+}
+
+body{
+    background:#040404;
+    color:#eee;
+    overflow-x:hidden;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(circle at 20% 30%,rgba(0,255,255,.08),transparent 35%),
+        radial-gradient(circle at 80% 70%,rgba(255,255,255,.05),transparent 40%),
+        radial-gradient(circle at 50% 50%,rgba(120,120,255,.06),transparent 45%);
+    animation:move 14s linear infinite alternate;
+    z-index:-2;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:url("https://www.transparenttextures.com/patterns/stardust.png");
+    opacity:.08;
+    z-index:-1;
+}
+
+@keyframes move{
+    from{
+        transform:scale(1) rotate(0deg);
+    }
+    to{
+        transform:scale(1.3) rotate(8deg);
+    }
+}
+
+.glow{
+    position:fixed;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    background:#6ff;
+    filter:blur(180px);
+    opacity:.06;
+    top:-100px;
+    left:-120px;
+    animation:floatGlow 10s ease-in-out infinite alternate;
+    z-index:-3;
+}
+
+@keyframes floatGlow{
+    to{
+        transform:translate(200px,120px);
+    }
+}
+
+.card{
+    width:min(900px,92%);
+    padding:45px;
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:28px;
+    box-shadow:
+        0 0 60px rgba(0,255,255,.05),
+        0 0 120px rgba(255,255,255,.03);
+}
+
+.avatar{
+    display:flex;
+    justify-content:center;
+    margin-bottom:25px;
+}
+
+.avatar img{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid rgba(255,255,255,.15);
+    box-shadow:
+        0 0 25px rgba(255,255,255,.15),
+        0 0 70px rgba(0,255,255,.12);
+    animation:floatAvatar 4s ease-in-out infinite;
+    transition:.4s;
+}
+
+.avatar img:hover{
+    transform:scale(1.05);
+    box-shadow:
+        0 0 40px #8ef5ff,
+        0 0 100px rgba(142,245,255,.3);
+}
+
+@keyframes floatAvatar{
+    0%,100%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+.nickname{
+    text-align:center;
+    font-size:42px;
+    font-weight:200;
+    letter-spacing:8px;
+    margin-bottom:10px;
+    background:linear-gradient(90deg,#ffffff,#8ef5ff,#ffffff);
+    background-size:300%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:shine 6s linear infinite;
+}
+
+@keyframes shine{
+    from{
+        background-position:0%;
+    }
+    to{
+        background-position:300%;
+    }
+}
+
+.subtitle{
+    text-align:center;
+    letter-spacing:6px;
+    font-size:12px;
+    opacity:.55;
+    margin-bottom:40px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.box{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    padding:22px;
+    border-radius:18px;
+    transition:.35s;
+}
+
+.box:hover{
+    transform:translateY(-5px);
+    border-color:#7ef9ff;
+    box-shadow:0 0 30px rgba(126,249,255,.15);
+}
+
+h2{
+    font-size:14px;
+    letter-spacing:3px;
+    margin-bottom:18px;
+    color:#8ef5ff;
+    text-transform:uppercase;
+}
+
+a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:8px 0;
+    opacity:.8;
+    transition:.25s;
+    word-break:break-word;
+}
+
+a:hover{
+    opacity:1;
+    color:#8ef5ff;
+    padding-left:8px;
+}
+
+.wallet{
+    margin:10px 0;
+    padding:10px;
+    background:rgba(255,255,255,.03);
+    border-radius:10px;
+    font-size:13px;
+    word-break:break-all;
+}
+
+.wallet span{
+    display:block;
+    color:#8ef5ff;
+    margin-bottom:6px;
+    font-size:12px;
+    letter-spacing:2px;
+}
+
+@media(max-width:700px){
+    .card{
+        padding:30px;
+    }
+
+    .nickname{
+        font-size:32px;
+    }
+
+    .avatar img{
+        width:140px;
+        height:140px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="glow"></div>
+
+<div class="card">
+
+    <div class="avatar">
+        <img src="https://i.pinimg.com/736x/e4/87/6e/e4876eda063fb980876abb4343ac60b2.jpg" alt="anime">
+    </div>
+
+    <div class="nickname">
+        wrholder
+    </div>
+
+    <div class="subtitle">
+        神デレ
+    </div>
+
+    <div class="grid">
+
+        <div class="box">
+            <h2>Links</h2>
+
+            <a href="https://soundcloud.com/appleemojies" target="_blank">
+                SoundCloud
+            </a>
+
+            <a href="https://ru.pinterest.com/dota2ceo/" target="_blank">
+                Pinterest
+            </a>
+
+            <a href="https://t.me/wrholder" target="_blank">
+                Telegram
+            </a>
+
+            <a href="https://lolz.team/members/10449144" target="_blank">
+                LolzTeam
+            </a>
+        </div>
+
+        <div class="box">
+            <h2>Crypto</h2>
+
+            <div class="wallet">
+                <span>TRC20</span>
+                TVq8UeLQieymuTyK9E2829Qh9jS6wXxAtW
+            </div>
+
+            <div class="wallet">
+                <span>BNB</span>
+                0x36Df0C48A4f03b3504d9cf6A7789F8Bc061515F9
+            </div>
+
+            <div class="wallet">
+                <span>TON</span>
+                UQATO1EN1dEuz_X8C55OU4_fbCvUF13Hssl8K66NvNc7ycrM
+            </div>
+
+            <div class="wallet">
+                <span>BTC</span>
+                bc1q83t792gfj5xhmyedfm0tfvu9h0zqzr25j27v2a
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
 </body>
 </html>
