@@ -295,6 +295,16 @@ a:hover{
     </div>
 
 </div>
+<script>
+document.querySelectorAll('.wallet').forEach(wallet => {
+    wallet.style.cursor = 'pointer';
 
+    wallet.addEventListener('click', () => {
+        const text = wallet.childNodes[2].textContent.trim();
+
+        navigator.clipboard.writeText(text);
+    });
+});
+</script>
 </body>
 </html>
